@@ -1,5 +1,7 @@
 import json
 from flask import Flask, request, Response
+import requests
+from rembg import remove
 
 app = Flask(__name__)
 
@@ -17,9 +19,15 @@ def remove_background():
     if not url:
         return Response(json.dumps({'error': 'Missing URL parameter'}), status=400, mimetype='application/json')
 
+    # Download the image from the URL
+    response = requests.get(url)
+    input_data = response.content
+
     # Process the image to remove background
-    # Replace this part with your actual background removal logic
-    # For example, you can use rembg library as in your original code
+    output_data = remove(input_data)
+
+    # Return the background removed image
+    return Response(output_data, status=200, mimetype='image/png')
 
 if __name__ == '__main__':
     app.run(debug=True)
