@@ -30,4 +30,4 @@ def remove_background():
     return Response(output_data, status=200, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8080)  # You can choose any available port
