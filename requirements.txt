@@ -1,2 +1,2 @@
-rembg==2.0.28
-requests==2.31.0
+rembg
+requests
