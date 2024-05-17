@@ -10,7 +10,7 @@ app = Flask(__name__)
 port = int(os.environ.get('PORT', 8080))
 
 # Health check route
-@app.route('/health', methods=['GET'])
+@app.route('/', methods=['GET'])
 def health_check():
     return Response(json.dumps({'status': 'OK'}), status=200, mimetype='application/json')
 
