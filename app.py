@@ -2,11 +2,15 @@ import json
 from flask import Flask, request, Response
 import requests
 from rembg import remove
+import os
 
 app = Flask(__name__)
 
+# Get the port from the PORT environment variable or use 8080 as default
+port = int(os.environ.get('PORT', 8080))
+
 # Health check route
-@app.route('/', methods=['GET'])
+@app.route('/health', methods=['GET'])
 def health_check():
     return Response(json.dumps({'status': 'OK'}), status=200, mimetype='application/json')
 
@@ -30,4 +34,5 @@ def remove_background():
     return Response(output_data, status=200, mimetype='image/png')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)  # You can choose any available port
+    # Run the app with binding to the port specified by the PORT environment variable or 8080 as default
+    app.run(debug=True, host='0.0.0.0', port=port)
